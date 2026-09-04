@@ -104,3 +104,13 @@ curl "http://localhost:8000/api/evaluate/stream?scenario=all"
 ```
 
 Results saved to `results/batch_run_{timestamp}.json`.
+
+---
+
+## Manual Review Procedures
+
+For the cases our system cannot handle automatically (documented in the Honest Exception List), a human reviewer or merchant support agent would need to intervene:
+
+- **Large JavaScript-rendered storefronts:** If a merchant submits a highly dynamic SPA URL that the scraper fails to read, a support representative must guide them to use the CSV upload or Google Sheets method instead.
+- **Complex Currency Conversions:** If products are listed in USD/EUR without an explicitly provided exchange rate, the merchant must be asked to standardize their pricing to INR before the catalog goes live.
+- **Persistent Agent Confusion:** If a buyer's query is so ambiguous that the agent fails to find a match after 2 retries, the session escalates to a human fallback message advising the user to browse the catalog manually.

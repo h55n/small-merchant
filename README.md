@@ -43,9 +43,13 @@ The system consists of four major components wired together:
 
 ---
 
-## Problem Statement
+## Problem Statement & Why Now
 
-Over **500,000 small merchants** accept payments via Razorpay, but practically **none** can be queried or bought from by autonomous AI buyer agents. Large platforms (Zomato, BigBasket, Swiggy) have invested millions in custom integrations. This project builds the **missing AI-commerce onboarding layer**.
+Razorpay has **500,000+ small merchants**, but the emerging agentic commerce infrastructure currently only works for a handful of enterprise players (Zomato, Swiggy, Zepto on Claude; BigBasket on ChatGPT). These enterprises have dedicated engineering teams to manually build integration layers. 
+
+Meanwhile, everyday small merchants are invisible to AI buyers because they lack machine-readable catalogs, agent-queryable pricing endpoints, and delegation flows.
+
+**Why this matters now:** In June 2026, UPI processed 22.71 billion transactions worth ₹28.92 trillion, with 63.5% being peer-to-merchant (P2M). As NPCI's Unified Agent Protocol (UAP) nears launch, registered AI agents will soon initiate UPI P2M transactions without per-transaction human approval. Merchants who are not discoverable to AI buyers will lose out permanently. This project provides the **missing self-service AI-commerce onboarding layer** allowing any merchant with a simple CSV or Google Sheet to become agent-ready in under 5 minutes.
 
 ---
 
@@ -296,6 +300,22 @@ AI Agent Request to Pay
 
 ---
 
+## AI vs. Deterministic Logic: Design Decisions
+
+We carefully drew boundaries between where AI excels and where it introduces unacceptable risk:
+
+- **Where AI is used:** 
+  - **Natural Language Search:** Mapping vague user intents ("cheapest kurta under 800") to structured products using embeddings. 
+  - **Conversational UX:** Structuring the agent's interaction loop and handling ambiguous queries.
+- **Where Deterministic Logic is used (NO AI):**
+  - **Safety & Permissions (`permission_enforcer.py`):** The confirmation gate, spending limits, and maximum retry counts are strictly deterministic.
+  - **Payment Execution:** The integration with Razorpay MCP and SDK relies on exact structured JSON-RPC calls.
+  - **Price Calculation:** Math and totals are calculated outside the LLM to prevent hallucination.
+
+*Decision Rationale:* We would never trust an LLM to self-regulate a spending limit or unilaterally authorize a transaction. AI handles the unstructured fuzziness of human intent, while deterministic code handles the money.
+
+---
+
 ## Testing
 
 ### Unit Test Suite (34 Tests)
@@ -392,6 +412,29 @@ Every agent session produces a complete, immutable audit record:
   "safety_violations": 0
 }
 ```
+
+---
+
+## Failure Recovery: What Broke During Building?
+
+During development, we encountered a critical failure with **Vercel Static SPA Routing**. When deployed, direct navigation to subpages (like `/dashboard`) caused 404s or crashed the app because the static host couldn't resolve the React Router paths, compounded by our backend API not being available in the static environment. 
+
+**How we got out:** We implemented a robust fallback mechanism. We added a global `ErrorBoundary`, updated our `api.ts` to detect HTML responses (indicative of routing fallbacks), and injected `demoData.ts` as a mock provider when the live API wasn't reachable. This ensured the app gracefully degraded to a fully interactive demo mode rather than crashing.
+
+---
+
+## What We Would Build Next
+
+With more time, we would implement:
+1. **Live Google Sheets Sync:** Bi-directional syncing so merchants can update stock in their sheet and see it instantly reflected in the agent catalog.
+2. **WhatsApp Bot Interface:** Allowing buyers to interact with the agent natively on WhatsApp instead of a web app.
+3. **Multi-Merchant Cart:** Allowing the buyer agent to source products from multiple independent small merchants in a single aggregated transaction.
+
+---
+
+## Evaluation & Honest Exceptions
+
+Please see [EVALUATION.md](./EVALUATION.md) for full metrics, batch evaluation instructions with the synthetic dataset, our honest exception list (known limitations), and manual review procedures.
 
 ---
 
