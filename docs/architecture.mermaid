@@ -1,0 +1,67 @@
+flowchart TB
+    subgraph MERCHANT["🏪 Merchant Side — Onboarding"]
+        direction TB
+        UPLOAD["📄 CSV / Sheets / Form / URL"]
+        PARSER["parsers.py\nparse_csv · parse_sheets\nparse_manual · parse_url"]
+        NORM["normalizer.py\nvalidate · clean_price\n₹1,299 → 1299.0"]
+        EMBED["embedder.py\nall-MiniLM-L6-v2\nbatched embeddings"]
+        DB[("🗄️ SQLite / PostgreSQL\nDBMerchant · DBProduct\nDBSession · DBAuditEntry")]
+        CATALOG_API["📡 Catalog API\nGET /catalog/{id}\nGET /catalog/{id}/search"]
+    end
+
+    subgraph BUYER["🤖 Buyer Agent Side"]
+        direction TB
+        INTENT["Purchase Intent\n'buy the cheapest kurta'"]
+        AGENT["buyer_agent.py\nBuyerAgent\n7 Tools · async generator loop"]
+        PERM["permission_enforcer.py\n① attempt limit\n② buyer limit\n③ merchant cap\n④ exclusions\n⑤ confirmation ALWAYS"]
+        GATE["🔒 Confirmation Gate\nNon-bypassable\nHard-blocked in 2 places"]
+        PAY["razorpay_client.py\nTest-mode UPI/Card/NetBanking\nSimulation fallback"]
+        AUDIT["audit/logger.py\nSessionAuditLogger\nPersists every step"]
+    end
+
+    subgraph AI["🧠 AI Provider Cascade"]
+        direction LR
+        ANT["1️⃣ Anthropic\nclaude-sonnet-4-6"]
+        OAI["2️⃣ OpenAI\ngpt-4o-mini"]
+        GEM["3️⃣ Gemini\ngemini-1.5-flash"]
+        OLL["4️⃣ Ollama\nllama3.2 (local)"]
+        TPL["5️⃣ Template\nNo network needed"]
+        ANT -->|"fail"| OAI -->|"fail"| GEM -->|"fail"| OLL -->|"fail"| TPL
+    end
+
+    subgraph FRONTEND["🖥️ Frontend — React/TS/Vite"]
+        direction LR
+        LAND["Landing.tsx\nHero · Stats · How-it-works"]
+        MERCH_PG["MerchantPage.tsx\n4-tab onboarding\nCSV · Sheets · Form · URL"]
+        BUYER_PG["BuyerPage.tsx\nWebSocket chat\nConfirmation modal\nAudit trail"]
+        EVAL_PG["EvalPage.tsx\nSSE progress bar\n70-scenario runner"]
+        AUDIT_PG["AuditPage.tsx\nTimeline · JSON panels"]
+        DASH["DashboardPage.tsx\nProduct management\nPermission editor"]
+    end
+
+    subgraph INFRA["☁️ Infrastructure"]
+        direction TB
+        DOCKER["Docker Compose\nbackend · frontend\npostgres · redis\nprometheus"]
+        CI["GitHub Actions CI\nPython syntax check\nTS strict mode\nVite build\nDocker build"]
+        ALEMBIC["Alembic Migrations\n001_initial_schema\nrender_as_batch\nSQLite + PostgreSQL"]
+        REDIS["Redis\nSession state\nDistributed scaling"]
+        PROM["Prometheus\n/metrics endpoint\nSessions · Payments\nSearch latency"]
+    end
+
+    UPLOAD --> PARSER --> NORM --> EMBED --> DB
+    DB --> CATALOG_API
+    CATALOG_API --> AGENT
+    INTENT --> AGENT
+    AGENT <-->|"tool calls"| AI
+    AGENT --> PERM --> GATE --> PAY
+    PAY -->|"payment_id"| AUDIT
+    AUDIT --> DB
+    FRONTEND <-->|"REST + WebSocket + SSE"| CATALOG_API
+    INFRA -.->|"runs"| MERCHANT
+    INFRA -.->|"runs"| BUYER
+    INFRA -.->|"runs"| FRONTEND
+
+    style GATE fill:#d92d20,color:#fff,stroke:#b91c1c
+    style AI fill:#1e3a8a,color:#fff,stroke:#1b4dff
+    style PERM fill:#92400e,color:#fff,stroke:#b45309
+    style INFRA fill:#14532d,color:#fff,stroke:#16a34a

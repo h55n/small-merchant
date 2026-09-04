@@ -1,0 +1,34 @@
+# ── Secrets (NEVER commit) ────────────────────────────────────────────────────
+.env
+.env.local
+.env.docker.local
+backend/.env
+
+# ── Python ────────────────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.so
+*.egg-info/
+.venv/
+venv/
+env/
+dist/
+build/
+*.egg
+
+# ── Database (dev only — use PostgreSQL in production) ─────────────────────────
+backend/data/app.db
+backend/data/*.db
+
+# ── Evaluation results (large JSON) ──────────────────────────────────────────
+backend/results/*.json
+
+# ── Node / Frontend ───────────────────────────────────────────────────────────
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+
+# ── Docker / OS ───────────────────────────────────────────────────────────────
+*.log
+.DS_Store
+Thumbs.db

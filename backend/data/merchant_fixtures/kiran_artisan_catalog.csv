@@ -1,0 +1,31 @@
+product_id,name,price,description,stock,category,return_policy_days
+prod_001,Red Linen Kurta,650,Hand-woven linen kurta in deep red. Available in sizes S to XL. Breathable fabric perfect for summer.,8,Clothing,7
+prod_002,Khadi Cotton Fabric 2m,750,Pure khadi cotton fabric 2 meters. Natural off-white. Ideal for stitching kurtas or shirts.,20,Clothing,0
+prod_003,Indigo Block Print Kurta,920,Hand block printed kurta using natural indigo dye. Each piece is unique. Sizes M to XXL.,5,Clothing,7
+prod_004,Blue Canvas Tote Bag,899,Sturdy canvas tote bag in navy blue. Internal zip pocket. 15L capacity. Handles reinforced with leather.,12,Accessories,14
+prod_005,Embroidered Clutch Purse,1350,Hand-embroidered clutch with mirror work. Cotton lining. 22cm x 12cm. Comes in gift box.,6,Accessories,7
+prod_006,Handmade Terracotta Pot,1200,Hand-thrown terracotta pot with hand-painted geometric patterns. 20cm diameter. Ideal for succulents.,10,Home & Living,0
+prod_007,Raw Forest Honey 500g,450,Unprocessed raw honey sourced from Nilgiri forests. No additives. Glass jar with sealed lid.,25,Food & Beverage,0
+prod_008,Himalayan Green Tea 100g,350,Hand-picked first flush green tea from Darjeeling. Light floral notes. Loose leaf. 40–50 cups.,30,Food & Beverage,0
+prod_009,Eco Yoga Mat 6mm,799,Non-slip yoga mat made from natural rubber. 6mm thick. 183cm x 61cm. Carry strap included.,15,Sports & Fitness,14
+prod_010,Soy Wax Candle - Jasmine,599,Hand-poured soy wax candle with jasmine essential oil. 200g. 40-hour burn time. Cotton wick.,18,Home & Living,0
+prod_011,Pure Linen Shirt,1100,100% pure linen shirt. Breathable and wrinkle-resistant. Sizes S to XXL. Available in white and beige.,7,Clothing,14
+prod_012,Silk Dupatta,1500,Pure silk dupatta with zari border. 2.5m length. Color: peacock blue with gold border.,4,Clothing,7
+prod_013,Handcrafted Wooden Bowl,950,Hand-carved mango wood bowl. Food-safe finish. 25cm diameter. Each has unique grain pattern.,8,Home & Living,0
+prod_014,Vitamin C Face Serum,699,Natural vitamin C serum with rosehip and turmeric. 30ml. Suitable for all skin types. Dermatologist tested.,20,Health & Beauty,30
+prod_015,Cold Pressed Coconut Oil 250ml,380,Virgin cold-pressed coconut oil. Unrefined. Suitable for cooking and hair care. BPA-free bottle.,35,Health & Beauty,0
+prod_016,Natural Jute Bag,299,Eco-friendly jute bag with cotton lining. 12L capacity. Foldable. Machine washable.,40,Accessories,0
+prod_017,Hand-Painted Tie-Dye T-Shirt,899,Hand-painted tie-dye cotton t-shirt. 100% organic cotton. Each piece unique. Sizes S–XL.,6,Clothing,7
+prod_018,Bamboo Water Bottle 750ml,499,Leak-proof bamboo exterior water bottle with stainless steel interior. BPA-free. 750ml capacity.,22,Home & Living,14
+prod_019,Kansa Thali Set (6pcs),2100,Traditional kansa (bronze) thali set with 6 pieces. Antifungal properties. Handmade by Odisha artisans.,3,Home & Living,0
+prod_020,Raw Shea Butter 200g,420,Unrefined African shea butter. 100% pure. Multi-purpose moisturizer for skin and hair.,28,Health & Beauty,0
+prod_021,Block Print Bedsheet Double,1350,Hand block printed cotton bedsheet (double). Rajasthani floral motif. Includes 2 pillowcases.,5,Home & Living,14
+prod_022,Dhoop Sticks - Sandalwood,199,Premium sandalwood dhoop sticks. 20 sticks per box. Slow burning. 45 min per stick.,50,Home & Living,0
+prod_023,Brass Diya Set (5pcs),549,Traditional brass diyas. Set of 5. Hand polished. Includes cotton wicks. Perfect for pooja.,20,Home & Living,0
+prod_024,Moringa Leaf Powder 100g,320,Organic moringa leaf powder. Rich in vitamins and minerals. Food-grade certified. Resealable pouch.,30,Food & Beverage,0
+prod_025,Handloom Silk Saree,3200,Pure handloom silk saree from Pochampally. Traditional ikat pattern. 6.3m with blouse piece.,2,Clothing,0
+prod_026,Copper Water Bottle 1L,650,Pure copper water bottle. Leak-proof lid. Ayurvedic benefits. 1L capacity. Handcrafted.,16,Health & Beauty,14
+prod_027,Turmeric Face Mask Powder,279,Ayurvedic turmeric face mask with sandalwood and rose. 100g. Brightening and anti-inflammatory.,25,Health & Beauty,0
+prod_028,Bamboo Toothbrush Pack 4,249,Pack of 4 bamboo toothbrushes with BPA-free bristles. Compostable handle. Medium bristle.,45,Health & Beauty,0
+prod_029,Handmade Lavender Soap,180,Cold-process lavender soap with shea butter. 100g. No sulfates or parabens. Single bar.,60,Health & Beauty,0
+prod_030,Madhubani Art Print A3,1800,Original Madhubani art print on handmade paper. A3 size. Depicts folk mythology. Unframed.,2,Books & Media,0
