@@ -1,6 +1,4 @@
 <div align="center">
-  <img src="./docs/small-merchant-dia.png" alt="Architecture Diagram" width="300" />
-  
   <h1>Small-Merchant AI Readiness Agent 🤖</h1>
 
   <p>
@@ -24,6 +22,8 @@ Make any small merchant catalog **discoverable and transactable by AI buyer agen
 ---
 
 ## Architecture
+
+![Small-Merchant AI Readiness Agent — System Diagram](./docs/small-merchant-dia.png)
 
 The system consists of four major components wired together:
 
