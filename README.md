@@ -1,14 +1,29 @@
-# Small-Merchant AI Readiness Agent
+<div align="center">
+  <img src="./docs/small-merchant-dia.png" alt="Architecture Diagram" width="300" />
+  
+  <h1>Small-Merchant AI Readiness Agent 🤖</h1>
 
-> **Razorpay AI Buildathon 2026 — Track 01: AI Growth & Agentic Commerce**
+  <p>
+    <a href="https://rzp-ai.vercel.app">Live Demo</a> | <a href="https://github.com/h55n/small-merchant">GitHub</a>
+  </p>
+
+  <p>
+    <a href="https://rzp-ai.vercel.app"><img src="https://img.shields.io/badge/LIVE_DEMO-rzp--ai.vercel.app-blue?style=for-the-badge&logo=vercel" alt="Live Demo" /></a>
+    <img src="https://img.shields.io/badge/TRACK-01_AI_GROWTH-purple?style=for-the-badge" alt="Track 01" />
+    <img src="https://img.shields.io/badge/LICENSE-MIT-green?style=for-the-badge" alt="License" />
+    <img src="https://img.shields.io/badge/BUILT_FOR-RAZORPAY_AI_BUILDATHON-black?style=for-the-badge&logo=razorpay" alt="Razorpay Buildathon" />
+  </p>
+
+  <p>
+    <strong>Razorpay AI Buildathon 2026 — Track 01: AI Growth & Agentic Commerce</strong>
+  </p>
+</div>
 
 Make any small merchant catalog **discoverable and transactable by AI buyer agents** — onboarding in under 5 minutes, with a non-bypassable safety confirmation gate preventing any unauthorized spend.
 
 ---
 
 ## Architecture
-
-![Small-Merchant AI Readiness Agent — System Diagram](./docs/small-merchant-dia.png)
 
 The system consists of four major components wired together:
 
