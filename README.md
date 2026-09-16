@@ -137,8 +137,8 @@ Python 3.11+, Node.js 18+, Redis (optional, uses memory fallback)
 
 ### 1. Clone and configure
 ```bash
-git clone <repo-url>
-cd "Small merchant"
+git clone https://github.com/h55n/small-merchant.git
+cd small-merchant
 
 # Copy environment template
 cp backend/.env.example backend/.env
@@ -146,9 +146,9 @@ cp backend/.env.example backend/.env
 
 ### 2. Configure `.env`
 ```env
-# Razorpay (Test Mode)
-RAZORPAY_KEY_ID=rzp_test_TXvZCenSDbxllY
-RAZORPAY_KEY_SECRET=ndllMASxo0fZtdeWH9D05sm9
+# Razorpay (Test Mode) — use your own test credentials; never commit real keys
+RAZORPAY_KEY_ID=rzp_test_your_key_id
+RAZORPAY_KEY_SECRET=your_test_key_secret
 
 # At least one LLM (all optional — system works without any)
 GROQ_API_KEY=gsk_...
@@ -158,6 +158,8 @@ ANTHROPIC_API_KEY=sk-ant-...
 OPENAI_API_KEY=sk-...
 GOOGLE_API_KEY=...
 ```
+
+> Security: keep real credentials only in local environment files or deployment secret stores. If a credential has ever been committed, rotate/revoke it even after removing it from the current README.
 
 ### 3. Start backend
 ```bash
@@ -222,7 +224,7 @@ python -m src.evaluator --scenario all               # Full eval suite
 ## Project Structure
 
 ```
-Small merchant/
+small-merchant/
 ├── backend/
 │   ├── src/
 │   │   ├── main.py                    # FastAPI app entrypoint
