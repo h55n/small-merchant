@@ -74,11 +74,11 @@ class StepType(str, Enum):
 class ShippingOption(BaseModel):
     method: str = "standard"
     days: int = 5
-    cost_inr: float = 0.0
+    cost_inr: float = Field(default=0.0, ge=0, allow_inf_nan=False)
 
 class PaymentConstraints(BaseModel):
-    min_order_inr: float = 0.0
-    max_order_inr: float = 100000.0
+    min_order_inr: float = Field(default=0.0, ge=0, allow_inf_nan=False)
+    max_order_inr: float = Field(default=100000.0, ge=0, allow_inf_nan=False)
     accepted_methods: List[PaymentMethod] = [PaymentMethod.UPI, PaymentMethod.CARD, PaymentMethod.NETBANKING]
 
 class NormalizedProduct(BaseModel):
@@ -107,9 +107,9 @@ class NormalizedProduct(BaseModel):
         return v.strip()[:500] if v else ""
 
 class AgentPermissions(BaseModel):
-    max_transaction_inr: float = Field(default=10000.0, ge=0)
-    requires_confirmation_above_inr: float = Field(default=500.0, ge=0)
-    auto_approve_below_inr: float = Field(default=0.0, ge=0)  # Always 0 — confirmation always required
+    max_transaction_inr: float = Field(default=10000.0, ge=0, allow_inf_nan=False)
+    requires_confirmation_above_inr: float = Field(default=500.0, ge=0, allow_inf_nan=False)
+    auto_approve_below_inr: float = Field(default=0.0, ge=0, allow_inf_nan=False)  # Always 0 — confirmation always required
     excluded_product_ids: List[str] = Field(default_factory=list)
 
 class MerchantCatalog(BaseModel):
@@ -166,7 +166,7 @@ class BuyerSession(BaseModel):
     session_id: str = Field(default_factory=lambda: f"sess_{uuid.uuid4().hex[:12]}")
     merchant_id: str
     purchase_intent: str
-    spending_limit_inr: float = 2000.0
+    spending_limit_inr: float = Field(default=2000.0, ge=0, allow_inf_nan=False)
     started_at: datetime = Field(default_factory=datetime.utcnow)
     completed_at: Optional[datetime] = None
     payment_attempts: int = 0

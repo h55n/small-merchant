@@ -6,6 +6,7 @@ Uses optional LLM for category inference when category is missing/ambiguous.
 from __future__ import annotations
 
 import logging
+import math
 import re
 import uuid
 from typing import Any, Dict, List, Optional, Tuple
@@ -28,10 +29,11 @@ AMBIGUOUS_CATEGORIES = {"misc", "miscellaneous", "na", "n/a", "none", "general",
 
 def _clean_price(raw_price: Any) -> Optional[float]:
     """Parse price from various formats: '750', 'Rs.750', '1,299.50', 750, etc."""
-    if raw_price is None:
+    if raw_price is None or isinstance(raw_price, bool):
         return None
     if isinstance(raw_price, (int, float)):
-        return float(raw_price)
+        value = float(raw_price)
+        return value if math.isfinite(value) and value != 0 else None
     price_str = str(raw_price).strip()
     # Step 1: Remove currency symbols and surrounding whitespace
     price_str = re.sub(r"(?i)(₹|rs\.?|inr)\s*", "", price_str).strip()
@@ -41,7 +43,7 @@ def _clean_price(raw_price: Any) -> Optional[float]:
     price_str = re.sub(r"[^\d.\-]", "", price_str)
     try:
         val = float(price_str)
-        return val if val != 0 else None
+        return val if math.isfinite(val) and val != 0 else None
     except ValueError:
         return None
 
@@ -50,7 +52,7 @@ def _clean_stock(raw_stock: Any) -> int:
     if raw_stock is None:
         return 0
     if isinstance(raw_stock, (int, float)):
-        return max(0, int(raw_stock))
+        return max(0, int(raw_stock)) if math.isfinite(raw_stock) else 0
     s = str(raw_stock).strip().lower()
     if s in ("yes", "true", "available", "in stock", "in-stock", "instock"):
         return 1
@@ -58,7 +60,7 @@ def _clean_stock(raw_stock: Any) -> int:
         return 0
     try:
         return max(0, int(float(s)))
-    except ValueError:
+    except (ValueError, OverflowError):
         return 0
 
 
