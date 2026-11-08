@@ -458,3 +458,11 @@ Please see [EVALUATION.md](./EVALUATION.md) for full metrics, batch evaluation i
 ## License
 
 MIT — Built for Razorpay AI Buildathon 2026.
+### Offline numeric-safety tests
+
+From `backend`, install `pydantic>=2.7,<3` and `pytest`, then run
+`PYTHONPATH=. pytest -q tests/test_numeric_safety.py`. This focused suite needs
+no API keys, model downloads, database or payment service. Catalog prices
+must be real numbers, and monetary limits must be finite and non-negative.
+Non-finite stock counts are treated as unavailable rather than crashing
+catalog normalization.

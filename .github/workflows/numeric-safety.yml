@@ -1,0 +1,22 @@
+name: Numeric safety
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  numeric-safety:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python: ['3.11', '3.12', '3.13']
+    defaults:
+      run:
+        working-directory: backend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - run: pip install 'pydantic>=2.7,<3' pytest
+      - run: PYTHONPATH=. pytest -q tests/test_numeric_safety.py
